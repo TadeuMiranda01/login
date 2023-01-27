@@ -15,17 +15,21 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
 
+import { OktaAuth } from '@okta/okta-auth-js';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { GameComponent } from './game/game.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    GameComponent
+    GameComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +52,17 @@ import { GameComponent } from './game/game.component';
     MatOptionModule,
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide: OktaAuth,
+      useValue: new OktaAuth({
+        issuer: 'https://dev-83005577.okta.com/oauth2/default',
+        clientId: '0oa83uhb8xPFFbxof5d7',
+      })
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
